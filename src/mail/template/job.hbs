@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Công Việc</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .greeting {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .job-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .job-title {
+            font-size: 22px;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .job-info {
+            margin: 15px 0;
+        }
+
+        .info-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        .info-value {
+            color: #333;
+            flex: 1;
+        }
+
+        .description {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .description h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .description p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 30px 0;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            background-color: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎯 Công ty {{receiver}}</h1>
+            <p>Thông tin chi tiết về công việc dành cho bạn</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">
+                Xin chào <strong>{{name}}</strong>,
+            </div>
+
+            <p style="color: #555; margin-bottom: 20px;">
+                Chúng tôi rất vui được chia sẻ với bạn thông tin về một cơ hội việc làm tuyệt vời phù hợp với hồ sơ của
+                bạn.
+            </p>
+
+            <!-- Job Card -->
+            <div class="job-card">
+                <div class="job-title">{{jobName}}</div>
+
+                {{#each jobs}}
+                <div class="job-info">
+                    <div class="info-row">
+                        <span class="info-label">Tên job:</span>
+                        <span class="info-value">{{name}}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">📍 Địa điểm:</span>
+                        <span class="info-value">{{company}}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">💰 Mức lương:</span>
+                        <span class="info-value">{{salary}} USD</span>
+                    </div>
+                    <div class="info-row">
+                        {{#each skills}}
+                        <span class="info-value">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+
+                {{/each}}
+
+            </div>
+
+            <!-- Description -->
+            {{#if description}}
+            <div class="description">
+                <h3>📋 Mô tả công việc</h3>
+                <p>{{description}}</p>
+            </div>
+            {{/if}}
+
+            <div class="divider"></div>
+
+            <!-- Call to Action -->
+            <div style="text-align: center;">
+                <p style="color: #555; margin-bottom: 20px;">
+                    Đây là cơ hội tuyệt vời để phát triển sự nghiệp của bạn!
+                </p>
+                <a href="{{applyLink}}" class="button">Ứng Tuyển Ngay</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Email này được gửi từ hệ thống tuyển dụng của chúng tôi</p>
+            <p style="margin-top: 10px;">
+                Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi
+            </p>
+            <div class="footer-links">
+                <a href="#">Trang chủ</a> |
+                <a href="#">Liên hệ</a> |
+                <a href="#">Chính sách</a>
+            </div>
+            <p style="margin-top: 15px; font-size: 12px; color: #999;">
+                © 2026 Job Portal. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
